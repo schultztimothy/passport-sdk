@@ -21,8 +21,77 @@ export default function Home() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    verifier.verifyPassport(addressInput).then((result) => {
-      setPassport(result);
+    const cred = {
+      "signature": "0x3079dbdf3e6750e4c6dfb150d43925635376d1fed33ea0b3a436de1d349cce2f0c40de7200e0536ffe54a9d353fc9a17216eef0f845c864f0c6bd96f07b133251b",
+      "challenge": {
+          "@context": [
+              "https://www.w3.org/2018/credentials/v1"
+          ],
+          "type": [
+              "VerifiableCredential"
+          ],
+          "credentialSubject": {
+              "id": "did:pkh:eip155:1:0x7A67063c391F266D31eA6c9eC7C788c1323B7746",
+              "provider": "challenge-GithubOrg",
+              "address": "0x7A67063c391F266D31eA6c9eC7C788c1323B7746",
+              "challenge": "I commit that this stamp is my unique and only GithubOrg verification for Passport.\n\nnonce: 01a0a5328afe04795046931fde0ebdee07f1d500bb738d3d5af97559b97a5bbd",
+              "@context": [
+                  {
+                      "address": "https://schema.org/Text",
+                      "challenge": "https://schema.org/Text",
+                      "provider": "https://schema.org/Text"
+                  }
+              ]
+          },
+          "issuer": "did:key:z6Mkgtpm1B5PXZCZZJKADWP3dC6Lkew5hVbv9Q1h8SVAQk2M",
+          "issuanceDate": "2022-08-01T17:30:54.499Z",
+          "proof": {
+              "type": "Ed25519Signature2018",
+              "proofPurpose": "assertionMethod",
+              "verificationMethod": "did:key:z6Mkgtpm1B5PXZCZZJKADWP3dC6Lkew5hVbv9Q1h8SVAQk2M#z6Mkgtpm1B5PXZCZZJKADWP3dC6Lkew5hVbv9Q1h8SVAQk2M",
+              "created": "2022-08-01T17:30:54.500Z",
+              "jws": "eyJhbGciOiJFZERTQSIsImNyaXQiOlsiYjY0Il0sImI2NCI6ZmFsc2V9..zG2gnqraw5bJu7TywY4xLpJLfkcifRxGDo4vh0DNVB1lhDmZKKMSaKM_GdIHDsiuw1EO_wzJmB9cWVgBbGhaDA"
+          },
+          "expirationDate": "2022-08-01T17:31:54.499Z"
+      },
+      "record": {
+          "type": "GithubOrg",
+          "version": "0.0.0",
+          "org": "gitcoinco",
+          "handle": "schultztimothy"
+      },
+      "credential": {
+          "@context": [
+              "https://www.w3.org/2018/credentials/v1"
+          ],
+          "type": [
+              "VerifiableCredential"
+          ],
+          "credentialSubject": {
+              "id": "did:pkh:eip155:1:0x7A67063c391F266D31eA6c9eC7C788c1323B7746",
+              "@context": [
+                  {
+                      "hash": "https://schema.org/Text",
+                      "provider": "https://schema.org/Text"
+                  }
+              ],
+              "provider": "GithubOrg",
+              "hash": "v0.0.0:Pqx+xqZbvZu0uNnmLexkHAGT9hkENyV+xrV1epvGZu4="
+          },
+          "issuer": "did:key:z6Mkgtpm1B5PXZCZZJKADWP3dC6Lkew5hVbv9Q1h8SVAQk2M",
+          "issuanceDate": "2022-08-01T17:30:57.228Z",
+          "proof": {
+              "type": "Ed25519Signature2018",
+              "proofPurpose": "assertionMethod",
+              "verificationMethod": "did:key:z6Mkgtpm1B5PXZCZZJKADWP3dC6Lkew5hVbv9Q1h8SVAQk2M#z6Mkgtpm1B5PXZCZZJKADWP3dC6Lkew5hVbv9Q1h8SVAQk2M",
+              "created": "2022-08-01T17:30:57.229Z",
+              "jws": "eyJhbGciOiJFZERTQSIsImNyaXQiOlsiYjY0Il0sImI2NCI6ZmFsc2V9..NkV2nSA1N1eZoib7WdwH66OoY6JHSTQPY3cgL8pPA6lzNmpcfYB9l0PCc5cBslzw5cwUHpNAmnfuYDCfhDS9Ag"
+          },
+          "expirationDate": "2022-10-30T17:30:57.228Z"
+      }
+  }
+    verifier.verifyCredential(cred.credential).then((result) => {
+      console.log({ result })
     });
   };
 
